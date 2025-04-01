@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Prediction Result | AI Finance</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #4361ee;
+        --secondary: #3f37c9;
+        --success: #4cc9f0;
+        --dark: #1a1a2e;
+        --light: #f8f9fa;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f5f7fa;
+        background: linear-gradient(
+          -45deg,
+          #ff6b6b,
+          #f06595,
+          #845ef7,
+          #5c7cfa,
+          #339af0,
+          #22b8cf
+        );
+
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        color: #333;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 2rem;
+
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      h1 {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+      }
+
+      .price-display {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin: 2rem 0;
+        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        display: inline-block;
+      }
+
+      .graph-container {
+        margin: 2rem 0;
+        padding: 1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        background: white;
+      }
+
+      .graph-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+
+      .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .btn {
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 6px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--secondary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--primary);
+        border: 1px solid var(--primary);
+      }
+
+      .btn-outline:hover {
+        background-color: rgba(67, 97, 238, 0.1);
+      }
+
+      .info-cards {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        flex: 1;
+        min-width: 200px;
+        text-align: center;
+      }
+
+      .card h3 {
+        color: var(--primary);
+        margin-top: 0;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1.5rem;
+          margin: 1rem;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 1rem">
+        <i
+          class="fas fa-chart-line"
+          style="font-size: 2.5rem; color: var(--primary)"
+        ></i>
+      </div>
+      <h1>Stock Prediction Results</h1>
+
+      <div class="price-display">
+        <i class="fas fa-rupee-sign"></i> {{ price }}
+      </div>
+      <p style="color: #666; max-width: 600px; margin: 0 auto">
+        The predicted price for the next trading period based on our AI
+        analysis.
+      </p>
+
+      <div class="info-cards">
+        <div class="card">
+          <h3><i class="fas fa-bolt"></i> Fast Prediction</h3>
+          <p>Results generated in seconds using advanced machine learning</p>
+        </div>
+        <div class="card">
+          <h3><i class="fas fa-history"></i> Historical Analysis</h3>
+          <p>Based on comprehensive historical data patterns</p>
+        </div>
+        <div class="card">
+          <h3><i class="fas fa-brain"></i> AI-Powered</h3>
+          <p>Utilizing neural networks for accurate forecasting</p>
+        </div>
+      </div>
+
+      <div class="graph-container">
+        <h3 style="margin-top: 0">Price Trend Visualization</h3>
+        <img src="data:image/png;base64,{{ graph }}" alt="Stock Price Graph" />
+      </div>
+
+      <div class="action-buttons">
+        <a href="/" class="btn btn-primary">
+          <i class="fas fa-home"></i> Back to Home
+        </a>
+        <button class="btn btn-outline" onclick="window.print()">
+          <i class="fas fa-print"></i> Print Report
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Simple animation on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll(
+          ".price-display, .card, .graph-container"
+        );
+        elements.forEach((el, index) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(20px)";
+          el.style.transition = "all 0.6s ease";
+          setTimeout(() => {
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+          }, 200 * index);
+        });
+      });
+
+      // Add analytics event tracking (example)
+      function trackButtonClick(action) {
+        console.log("User action:", action);
+        // In a real app, you would send this to your analytics platform
+      }
+    </script>
+  </body>
+</html>

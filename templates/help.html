@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Get help with Tata Motors stock prediction tool"
+    />
+    <title>Help Center | Tata Motors Stock Prediction</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <style>
+      :root {
+        --primary: #0061a8;
+        --primary-dark: #004d85;
+        --primary-light: #e6f2ff;
+        --secondary: #e74c3c;
+        --light: #f8f9fa;
+        --dark: #1a1a1a;
+        --gray: #6c757d;
+        --light-gray: #e9ecef;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+        --rounded-sm: 8px;
+        --rounded-md: 12px;
+        --rounded-lg: 16px;
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9fbfd;
+        color: var(--dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Modern glass navbar */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-sm);
+        padding: 1rem 2rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .navbar ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .navbar a {
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        border-radius: var(--rounded-sm);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .navbar a:hover {
+        color: var(--primary);
+        background: rgba(0, 97, 168, 0.05);
+      }
+
+      .navbar a.active {
+        color: var(--primary);
+        background: var(--primary-light);
+        font-weight: 600;
+      }
+
+      /* Modern hero section */
+      header {
+        background: linear-gradient(
+            135deg,
+            rgba(0, 97, 168, 0.9) 0%,
+            rgba(0, 77, 133, 0.9) 100%
+          ),
+          url("https://www.tatamotors.com/wp-content/uploads/2020/05/help-banner.jpg")
+            center/cover no-repeat;
+        height: 50vh;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        padding: 0 2rem;
+        margin-top: 60px;
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      }
+
+      header h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+
+      header p {
+        font-size: 1.25rem;
+        max-width: 700px;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+      }
+
+      /* Modern container */
+      .container {
+        max-width: 1000px;
+        margin: 3rem auto;
+        padding: 0 2rem;
+      }
+
+      /* FAQ Section */
+      .faq-section {
+        background: white;
+        border-radius: var(--rounded-lg);
+        box-shadow: var(--shadow-sm);
+        padding: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .faq-item {
+        margin-bottom: 1.5rem;
+        border-radius: var(--rounded-sm);
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .faq-question {
+        background: var(--light-gray);
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .faq-question:hover {
+        background: var(--primary-light);
+      }
+
+      .faq-question h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--dark);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .faq-question i:first-child {
+        color: var(--primary);
+        font-size: 1.2rem;
+      }
+
+      .faq-question .chevron {
+        transition: transform 0.3s ease;
+      }
+
+      .faq-item.active .chevron {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        background: white;
+      }
+
+      .faq-item.active .faq-answer {
+        padding: 1.5rem;
+        max-height: 500px;
+        border-top: 1px solid var(--light-gray);
+      }
+
+      .faq-answer p {
+        color: var(--gray);
+        line-height: 1.7;
+      }
+
+      /* Contact CTA */
+      .contact-cta {
+        text-align: center;
+        background: white;
+        border-radius: var(--rounded-lg);
+        box-shadow: var(--shadow-sm);
+        padding: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .contact-cta h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .contact-cta h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 2px;
+      }
+
+      .contact-cta p {
+        color: var(--gray);
+        max-width: 600px;
+        margin: 0 auto 2rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--rounded-sm);
+        font-weight: 500;
+        text-decoration: none;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+        gap: 0.5rem;
+      }
+
+      .btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Modern footer */
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 4rem 0 2rem;
+        margin-top: 4rem;
+        clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-light);
+      }
+
+      .footer-links a.active {
+        color: var(--primary-light);
+        font-weight: 600;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 1.25rem;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        color: var(--primary-light);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        header {
+          height: auto;
+          padding: 6rem 1.5rem;
+          clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+        }
+
+        .navbar ul {
+          gap: 0.5rem;
+        }
+
+        .faq-section,
+        .contact-cta {
+          padding: 1.5rem;
+        }
+
+        footer {
+          clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Modern glass navbar -->
+    <nav class="navbar animate__animated animate__fadeIn">
+      <ul>
+        <a href="/">Home</a>
+        <a href="/companyinfo">Company Info</a>
+        <a href="/contact">Contact</a>
+        <a href="/help">Help</a>
+        <a href="/feedback">Feedback</a>
+      </ul>
+    </nav>
+
+    <!-- Modern hero header with gradient overlay -->
+    <header class="animate__animated animate__fadeIn">
+      <div class="animate-fadeIn">
+        <h1>Help Center</h1>
+        <p>
+          Find answers to your questions about our stock prediction platform
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <!-- FAQ Section -->
+        <section class="faq-section animate-fadeIn">
+          <h2 style="text-align: center; margin-bottom: 2rem">
+            Frequently Asked Questions
+          </h2>
+
+          <div class="faq-item" onclick="toggleFAQ(this)">
+            <div class="faq-question">
+              <h3>
+                <i class="fas fa-question-circle"></i> How accurate are the
+                stock predictions?
+              </h3>
+              <i class="fas fa-chevron-down chevron"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Our predictions use advanced LSTM neural networks trained on 10+
+                years of historical data, achieving an average accuracy of
+                85-90% in backtesting. However, all predictions should be used
+                for informational purposes only as market conditions can change
+                rapidly.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="toggleFAQ(this)">
+            <div class="faq-question">
+              <h3>
+                <i class="fas fa-question-circle"></i> What time period should I
+                select for best results?
+              </h3>
+              <i class="fas fa-chevron-down chevron"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                For optimal results, we recommend selecting at least 6 months of
+                historical data. The model performs best with 1-3 years of data
+                as it can better identify long-term trends and patterns.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="toggleFAQ(this)">
+            <div class="faq-question">
+              <h3>
+                <i class="fas fa-question-circle"></i> How often is the
+                prediction model updated?
+              </h3>
+              <i class="fas fa-chevron-down chevron"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Our models are retrained weekly with the latest market data.
+                Major architecture updates occur quarterly to incorporate new
+                machine learning advancements.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="toggleFAQ(this)">
+            <div class="faq-question">
+              <h3>
+                <i class="fas fa-question-circle"></i> Can I use these
+                predictions for actual trading?
+              </h3>
+              <i class="fas fa-chevron-down chevron"></i>
+            </div>
+            <div class="faq-answer">
+              <p>
+                This tool is designed for educational and research purposes
+                only. We strongly recommend consulting with a licensed financial
+                advisor before making any investment decisions. Past performance
+                is not indicative of future results.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section
+          class="contact-cta animate-fadeIn"
+          style="animation-delay: 0.2s"
+        >
+          <h2>Still Need Help?</h2>
+          <p>
+            Can't find what you're looking for? Our support team is ready to
+            assist you with any questions.
+          </p>
+
+          <a href="/contact" class="btn">
+            <i class="fas fa-headset"></i>Contact Support
+          </a>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modern footer with clip-path -->
+    <footer class="animate-fadeIn" style="animation-delay: 0.4s">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/companyinfo">Company Info</a>
+          <a href="/contact">Contact</a>
+          <a href="/help">Help</a>
+          <a href="/feedback">Feedback</a>
+        </div>
+
+        <div class="social-links">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <p class="copyright">
+          &copy; 2023 Tata Motors Stock Prediction. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      function toggleFAQ(item) {
+        // Close all other FAQ items
+        document.querySelectorAll(".faq-item").forEach((faq) => {
+          if (faq !== item) {
+            faq.classList.remove("active");
+          }
+        });
+
+        // Toggle current item
+        item.classList.toggle("active");
+      }
+
+      // Open first FAQ by default
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".faq-item").classList.add("active");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | Tata Motors</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <style>
+      :root {
+        --primary: #0061a8;
+        --primary-light: rgba(0, 97, 168, 0.1);
+        --primary-dark: #004d85;
+        --secondary: #e74c3c;
+        --light: #f8f9fa;
+        --dark: #1a1a1a;
+        --gray: #6c757d;
+        --light-gray: #f1f3f5;
+        --glass: rgba(255, 255, 255, 0.15);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+        color: var(--dark);
+        line-height: 1.6;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Modern Navbar */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem 2rem;
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--glass-border);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        transition: var(--transition);
+      }
+
+      .navbar ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .navbar a {
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .navbar a:hover {
+        color: var(--primary);
+      }
+
+      .navbar a.active {
+        color: white;
+        background: var(--primary);
+        box-shadow: 0 4px 15px rgba(0, 97, 168, 0.3);
+      }
+
+      .navbar a.active:hover {
+        background: var(--primary-dark);
+      }
+
+      /* Modern Header */
+      header {
+        height: 60vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 2rem;
+        margin-top: 80px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://www.tatamotors.com/wp-content/uploads/2020/05/contact-us-banner.jpg")
+            center/cover no-repeat;
+        z-index: -1;
+      }
+
+      header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 3.5rem;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      header p {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 700px;
+      }
+
+      /* Modern Container */
+      .container {
+        max-width: 1200px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--glass-border);
+        transition: var(--transition);
+      }
+
+      .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Modern Form */
+      .form-group {
+        margin-bottom: 1.8rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.6rem;
+        font-weight: 500;
+        color: var(--dark);
+        font-size: 1rem;
+      }
+
+      .form-group i {
+        margin-right: 0.5rem;
+        color: var(--primary);
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: var(--transition);
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(0, 97, 168, 0.2);
+        background: white;
+      }
+
+      .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      /* Modern Button */
+      button {
+        width: 100%;
+        padding: 1rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        transition: var(--transition);
+      }
+
+      button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 97, 168, 0.3);
+      }
+
+      /* Feature Cards */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+        text-align: center;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: var(--dark);
+      }
+
+      .feature-card p {
+        color: var(--gray);
+        line-height: 1.7;
+      }
+
+      /* Modern Footer */
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 3rem 2rem;
+        margin-top: 3rem;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: var(--transition);
+        padding: 0.5rem;
+        border-radius: 4px;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-links a.active {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 1.5rem;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        color: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      /* Spinner */
+      .spinner {
+        display: none;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2.5rem;
+        }
+
+        header p {
+          font-size: 1rem;
+        }
+
+        .navbar ul {
+          gap: 0.5rem;
+        }
+
+        .navbar a {
+          font-size: 0.9rem;
+          padding: 0.5rem;
+        }
+
+        .container {
+          margin: 2rem 1rem;
+          padding: 1.5rem;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar animate__animated animate__fadeIn">
+      <ul>
+        <a href="/">Home</a>
+        <a href="/companyinfo">Company Info</a>
+        <a href="/contact">Contact</a>
+        <a href="/help">Help</a>
+        <a href="/feedback">Feedback</a>
+      </ul>
+    </nav>
+
+    <header class="animate__animated animate__fadeIn">
+      <h1>Contact Us</h1>
+      <p>Get in touch with our team for any inquiries</p>
+    </header>
+
+    <main>
+      <div class="container animate__animated animate__fadeInUp">
+        <section>
+          <h2 style="text-align: center; margin-bottom: 2rem">Contact Form</h2>
+
+          <form
+            id="contactForm"
+            class="animate-fadeIn"
+            style="animation-delay: 0.2s"
+          >
+            <div class="form-group">
+              <label for="name"><i class="fas fa-user"></i> Full Name:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="Enter your email address"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="subject"><i class="fas fa-tag"></i> Subject:</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+                placeholder="What's this about?"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="message"
+                ><i class="fas fa-comment"></i> Message:</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                placeholder="Type your message here..."
+              ></textarea>
+            </div>
+
+            <button type="submit">
+              <span id="buttonText">Send Message</span>
+              <div class="spinner" id="spinner"></div>
+            </button>
+          </form>
+        </section>
+      </div>
+
+      <div
+        class="container animate__animated animate__fadeInUp"
+        style="animation-delay: 0.2s"
+      >
+        <h2 style="text-align: center; margin-bottom: 2rem">
+          Other Ways to Reach Us
+        </h2>
+        <div class="features">
+          <div
+            class="feature-card animate-fadeIn"
+            style="animation-delay: 0.3s"
+          >
+            <div class="feature-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h3>Headquarters</h3>
+            <p>
+              Tata Motors Ltd, Bombay House, 24 Homi Mody Street, Mumbai 400001,
+              India
+            </p>
+          </div>
+          <div
+            class="feature-card animate-fadeIn"
+            style="animation-delay: 0.4s"
+          >
+            <div class="feature-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <h3>Phone</h3>
+            <p>+91-22-6665 8282<br />Mon-Fri, 9AM-6PM IST</p>
+          </div>
+          <div
+            class="feature-card animate-fadeIn"
+            style="animation-delay: 0.5s"
+          >
+            <div class="feature-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Email</h3>
+            <p>
+              investor.relations@tatamotors.com<br />customer.care@tatamotors.com
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="animate__animated animate__fadeInUp"
+      style="animation-delay: 0.4s"
+    >
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/companyinfo">Company Info</a>
+          <a href="/contact">Contact</a>
+          <a href="/help">Help</a>
+          <a href="/feedback">Feedback</a>
+        </div>
+        <p>&copy; 2025 Tata Motors Stock Prediction. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fas fa-building"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const buttonText = document.getElementById("buttonText");
+          const spinner = document.getElementById("spinner");
+
+          buttonText.textContent = "Sending...";
+          spinner.style.display = "block";
+
+          // Simulate form submission
+          setTimeout(() => {
+            // Create a modern notification instead of alert
+            const notification = document.createElement("div");
+            notification.style.position = "fixed";
+            notification.style.bottom = "20px";
+            notification.style.right = "20px";
+            notification.style.padding = "1rem 2rem";
+            notification.style.background = "var(--primary)";
+            notification.style.color = "white";
+            notification.style.borderRadius = "8px";
+            notification.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.2)";
+            notification.style.zIndex = "1000";
+            notification.style.transform = "translateY(20px)";
+            notification.style.opacity = "0";
+            notification.style.transition = "all 0.3s ease";
+            notification.textContent =
+              "Thank you for your message! We will contact you soon.";
+
+            document.body.appendChild(notification);
+
+            // Trigger animation
+            setTimeout(() => {
+              notification.style.transform = "translateY(0)";
+              notification.style.opacity = "1";
+            }, 10);
+
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+              notification.style.transform = "translateY(20px)";
+              notification.style.opacity = "0";
+              setTimeout(() => {
+                document.body.removeChild(notification);
+              }, 300);
+            }, 3000);
+
+            buttonText.textContent = "Send Message";
+            spinner.style.display = "none";
+            this.reset();
+          }, 1500);
+        });
+    </script>
+  </body>
+</html>

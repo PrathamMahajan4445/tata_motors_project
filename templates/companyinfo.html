@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Learn about Tata Motors - India's leading automotive manufacturer"
+    />
+    <title>About Tata Motors | Company Profile</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <style>
+      :root {
+        --primary: #0061a8;
+        --primary-dark: #004d85;
+        --primary-light: #e6f2ff;
+        --secondary: #e74c3c;
+        --light: #f8f9fa;
+        --dark: #1a1a1a;
+        --gray: #6c757d;
+        --success: #28a745;
+        --info: #17a2b8;
+        --warning: #ffc107;
+        --danger: #dc3545;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+        --rounded-sm: 8px;
+        --rounded-md: 12px;
+        --rounded-lg: 16px;
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9fbfd;
+        color: var(--dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Modern glass morphism navbar */
+      .navbar {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-sm);
+        padding: 1rem 2rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .navbar ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .navbar a {
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        border-radius: var(--rounded-sm);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .navbar a:hover {
+        color: var(--primary);
+        background: rgba(0, 97, 168, 0.05);
+      }
+
+      .navbar a.active {
+        color: var(--primary);
+        background: var(--primary-light);
+        font-weight: 600;
+      }
+
+      /* Modern hero section */
+      header {
+        background: linear-gradient(
+            135deg,
+            rgba(0, 97, 168, 0.9) 0%,
+            rgba(0, 77, 133, 0.9) 100%
+          ),
+          url("https://www.tatamotors.com/wp-content/uploads/2020/05/Tata-Motors-about-banner.jpg")
+            center/cover no-repeat;
+        height: 60vh;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        padding: 0 2rem;
+        margin-top: 60px;
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      }
+
+      header h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      header p {
+        font-size: 1.25rem;
+        max-width: 700px;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+      }
+
+      /* Modern container */
+      .container {
+        max-width: 1200px;
+        margin: 3rem auto;
+        padding: 0 2rem;
+      }
+
+      /* Modern cards */
+      .card {
+        background: white;
+        border-radius: var(--rounded-md);
+        box-shadow: var(--shadow-md);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        transition: var(--transition);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-5px);
+      }
+
+      .info-card {
+        background: var(--primary-light);
+        border-left: 4px solid var(--primary);
+        padding: 1.5rem;
+        border-radius: var(--rounded-sm);
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .info-card i {
+        color: var(--primary);
+        font-size: 1.5rem;
+        margin-top: 0.2rem;
+      }
+
+      .feature-card {
+        background: white;
+        border-radius: var(--rounded-md);
+        box-shadow: var(--shadow-sm);
+        padding: 2rem;
+        transition: var(--transition);
+        height: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .feature-card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-3px);
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        background: var(--primary-light);
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+
+      /* Modern grid layout */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      /* Typography */
+      h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: var(--dark);
+        position: relative;
+        display: inline-block;
+      }
+
+      h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 2px;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--dark);
+      }
+
+      p {
+        color: var(--gray);
+        margin-bottom: 1rem;
+        line-height: 1.7;
+      }
+
+      ul {
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+        color: var(--gray);
+      }
+
+      /* Modern footer */
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 4rem 0 2rem;
+        margin-top: 4rem;
+        clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-light);
+      }
+
+      .footer-links a.active {
+        color: var(--primary-light);
+        font-weight: 600;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 1.25rem;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        color: var(--primary-light);
+        transform: translateY(-3px);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+
+      .delay-1 {
+        animation-delay: 0.2s;
+      }
+      .delay-2 {
+        animation-delay: 0.4s;
+      }
+      .delay-3 {
+        animation-delay: 0.6s;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        header {
+          height: auto;
+          padding: 6rem 1.5rem;
+          clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+        }
+
+        .navbar ul {
+          gap: 0.5rem;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+        }
+
+        footer {
+          clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Modern glass navbar -->
+    <nav class="navbar animate__animated animate__fadeIn">
+      <ul>
+        <a href="/">Home</a>
+        <a href="/companyinfo">Company Info</a>
+        <a href="/contact">Contact</a>
+        <a href="/help">Help</a>
+        <a href="/feedback">Feedback</a>
+      </ul>
+    </nav>
+    <!-- Modern hero header with gradient overlay -->
+    <header class="animate__animated animate__fadeIn">
+      <div class="animate-fadeIn">
+        <h1>Driving Innovation Since 1945</h1>
+        <p>
+          Tata Motors - India's automotive pioneer with a global footprint
+          across 125+ countries
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <!-- Company Overview Section -->
+        <section class="animate-fadeIn">
+          <div class="card">
+            <h2>Company Overview</h2>
+
+            <div class="info-card">
+              <i class="fas fa-info-circle"></i>
+              <div>
+                <p>
+                  Tata Motors, part of the $128 billion Tata Group, is a global
+                  automobile manufacturer with operations spanning India, UK,
+                  South Korea, Thailand, and beyond. We're redefining mobility
+                  with innovative solutions.
+                </p>
+              </div>
+            </div>
+
+            <div class="features">
+              <div class="feature-card animate-fadeIn delay-1">
+                <h3>
+                  <i
+                    class="fas fa-globe-asia"
+                    style="color: var(--primary); margin-right: 10px"
+                  ></i>
+                  Global Presence
+                </h3>
+                <p>
+                  With operations in over 125 countries, we're India's largest
+                  automobile company and a market leader in commercial vehicles.
+                </p>
+                <div style="margin-top: 1.5rem">
+                  <span
+                    style="
+                      display: inline-block;
+                      background: var(--primary-light);
+                      color: var(--primary);
+                      padding: 0.5rem 1rem;
+                      border-radius: var(--rounded-sm);
+                      font-weight: 500;
+                    "
+                  >
+                    <i class="fas fa-map-marker-alt"></i> 125+ Countries
+                  </span>
+                </div>
+              </div>
+
+              <div class="feature-card animate-fadeIn delay-2">
+                <h3>
+                  <i
+                    class="fas fa-car"
+                    style="color: var(--primary); margin-right: 10px"
+                  ></i>
+                  Product Portfolio
+                </h3>
+                <p>Comprehensive range of automotive solutions:</p>
+                <ul>
+                  <li>
+                    <strong>Passenger Vehicles:</strong> Nexon, Harrier, Safari
+                  </li>
+                  <li>
+                    <strong>Electric Vehicles:</strong> Nexon EV, Tigor EV
+                  </li>
+                  <li><strong>Commercial Vehicles:</strong> Trucks, Buses</li>
+                  <li>
+                    <strong>Defense Vehicles:</strong> Specialized solutions
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section class="animate-fadeIn delay-1">
+          <div class="card">
+            <h2>Milestones & Achievements</h2>
+
+            <div class="features">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-trophy"></i>
+                </div>
+                <h3>Industry Firsts</h3>
+                <p>
+                  Pioneered India's first indigenous electric bus and developed
+                  the country's first crash-tested car.
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-landmark"></i>
+                </div>
+                <h3>Jaguar Land Rover</h3>
+                <p>
+                  Acquired Jaguar Land Rover in 2008, marking one of India's
+                  most significant global automotive acquisitions.
+                </p>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-road"></i>
+                </div>
+                <h3>Market Reach</h3>
+                <p>
+                  Over 9 million Tata vehicles on Indian roads, serving diverse
+                  mobility needs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="animate-fadeIn delay-2">
+          <div class="card">
+            <h2>By The Numbers</h2>
+            <p style="margin-bottom: 2rem">
+              Key metrics that define our scale and impact
+            </p>
+
+            <div class="features">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-industry"></i>
+                </div>
+                <h3>Manufacturing</h3>
+                <p>
+                  <strong>12</strong> plants across India and internationally
+                </p>
+                <div
+                  style="
+                    margin-top: 1rem;
+                    height: 4px;
+                    background: var(--primary-light);
+                    border-radius: 2px;
+                  "
+                >
+                  <div
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      background: var(--primary);
+                      border-radius: 2px;
+                    "
+                  ></div>
+                </div>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-users"></i>
+                </div>
+                <h3>Workforce</h3>
+                <p><strong>80,000+</strong> professionals worldwide</p>
+                <div
+                  style="
+                    margin-top: 1rem;
+                    height: 4px;
+                    background: var(--primary-light);
+                    border-radius: 2px;
+                  "
+                >
+                  <div
+                    style="
+                      width: 80%;
+                      height: 100%;
+                      background: var(--primary);
+                      border-radius: 2px;
+                    "
+                  ></div>
+                </div>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Market Cap</h3>
+                <p><strong>$22 Billion</strong> (2023 valuation)</p>
+                <div
+                  style="
+                    margin-top: 1rem;
+                    height: 4px;
+                    background: var(--primary-light);
+                    border-radius: 2px;
+                  "
+                >
+                  <div
+                    style="
+                      width: 65%;
+                      height: 100%;
+                      background: var(--primary);
+                      border-radius: 2px;
+                    "
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modern footer with clip-path -->
+    <footer class="animate-fadeIn delay-3">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/companyinfo">Company Info</a>
+          <a href="/contact">Contact</a>
+          <a href="/help">Help</a>
+          <a href="/feedback">Feedback</a>
+        </div>
+
+        <div class="social-links">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <p style="text-align: center; color: rgba(255, 255, 255, 0.7)">
+          &copy; 2023 Tata Motors. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

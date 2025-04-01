@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Predict Tata Motors stock prices using historical data and machine learning."
+    />
+    <title>Tata Motors Stock Prediction</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Animate.css for animations -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <style>
+      :root {
+        --primary: #0061a8;
+        --primary-dark: #004d85;
+        --secondary: #e74c3c;
+        --light: #f8f9fa;
+        --dark: #343a40;
+        --success: #28a745;
+        --info: #17a2b8;
+        --warning: #ffc107;
+        --danger: #dc3545;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f5f7fa;
+        background: linear-gradient(
+          -45deg,
+          #ff6b6b,
+          #f06595,
+          #845ef7,
+          #5c7cfa,
+          #339af0,
+          #22b8cf
+        );
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        color: #333;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Navigation Bar */
+      .navbar {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 1rem 2rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(5px);
+      }
+
+      .navbar ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .navbar a:hover {
+        color: var(--primary);
+      }
+
+      /* Animated financial background */
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+        overflow: hidden;
+      }
+
+      .background::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 30%,
+            rgba(0, 97, 168, 0.05) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(0, 97, 168, 0.05) 0%,
+            transparent 20%
+          );
+      }
+
+      .stock-line {
+        position: absolute;
+        height: 2px;
+        background: rgba(0, 97, 168, 0.1);
+        transform-origin: left center;
+        animation: stockMove 15s linear infinite;
+      }
+
+      .stock-line:nth-child(1) {
+        top: 20%;
+        left: -100px;
+        width: 150px;
+        animation-delay: 0s;
+      }
+
+      .stock-line:nth-child(2) {
+        top: 40%;
+        left: -200px;
+        width: 250px;
+        animation-delay: 2s;
+      }
+
+      .stock-line:nth-child(3) {
+        top: 60%;
+        left: -150px;
+        width: 200px;
+        animation-delay: 4s;
+      }
+
+      .stock-line:nth-child(4) {
+        top: 80%;
+        left: -300px;
+        width: 350px;
+        animation-delay: 1s;
+      }
+
+      .stock-line:nth-child(5) {
+        top: 30%;
+        right: -100px;
+        width: 150px;
+        animation-direction: reverse;
+        animation-delay: 3s;
+      }
+
+      .stock-line:nth-child(6) {
+        top: 50%;
+        right: -200px;
+        width: 250px;
+        animation-direction: reverse;
+        animation-delay: 5s;
+      }
+
+      .stock-line:nth-child(7) {
+        top: 70%;
+        right: -150px;
+        width: 200px;
+        animation-direction: reverse;
+        animation-delay: 2s;
+      }
+
+      @keyframes stockMove {
+        0% {
+          transform: translateX(0) scaleX(1);
+        }
+        50% {
+          transform: translateX(50vw) scaleX(1.5);
+        }
+        100% {
+          transform: translateX(100vw) scaleX(1);
+        }
+      }
+
+      /* Header with background image */
+      header {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://autocomponentsindia.com/wp-content/uploads/2021/02/KV.jpg")
+            center/cover no-repeat;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        color: white;
+        text-align: center;
+        padding: 0 20px;
+        margin-top: 60px; /* Adjusted for navbar */
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      header p {
+        font-size: 1.1rem;
+        max-width: 700px;
+        opacity: 0.9;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        transition: transform 0.3s ease;
+      }
+
+      .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+        text-align: left;
+      }
+
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 12px 15px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border 0.3s ease, box-shadow 0.3s ease;
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      input:focus,
+      select:focus {
+        border-color: var(--primary);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 97, 168, 0.2);
+        background: white;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      .error {
+        color: var(--danger);
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .error i {
+        font-size: 1.2rem;
+      }
+
+      .info-card {
+        background-color: #e7f5ff;
+        border-left: 4px solid var(--primary);
+        padding: 15px;
+        margin-bottom: 1.5rem;
+        border-radius: 0 5px 5px 0;
+        display: flex;
+        gap: 10px;
+      }
+
+      .info-card i {
+        color: var(--primary);
+        font-size: 1.2rem;
+        margin-top: 2px;
+      }
+
+      .result-container {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid var(--success);
+        display: none;
+      }
+
+      .result-container h3 {
+        color: var(--success);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .result-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--dark);
+      }
+
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .feature-card {
+        flex: 1 1 200px;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-icon {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      footer {
+        margin-top: 3rem;
+        padding: 2rem 1rem;
+        background: var(--dark);
+        color: white;
+        text-align: center;
+        position: relative;
+      }
+
+      .footer-content {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary);
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: var(--primary);
+      }
+
+      /* Loading spinner */
+      .spinner {
+        display: none;
+        width: 24px;
+        height: 24px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2rem;
+        }
+
+        .container {
+          padding: 1.5rem;
+          margin: 1.5rem;
+        }
+
+        .features {
+          flex-direction: column;
+        }
+
+        .navbar ul {
+          gap: 1rem;
+          flex-wrap: wrap;
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
+
+      /* Animation classes */
+      .animate-pop {
+        animation: popIn 0.5s ease-out forwards;
+      }
+
+      @keyframes popIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar animate__animated animate__fadeIn">
+      <ul>
+        <a href="/">Home</a>
+        <a href="/companyinfo">Company Info</a>
+        <a href="/contact">Contact</a>
+        <a href="/help">Help</a>
+        <a href="/feedback">Feedback</a>
+      </ul>
+    </nav>
+
+    <!-- Animated background elements -->
+    <div class="background">
+      <div class="stock-line"></div>
+      <div class="stock-line"></div>
+      <div class="stock-line"></div>
+      <div class="stock-line"></div>
+      <div class="stock-line"></div>
+      <div class="stock-line"></div>
+      <div class="stock-line"></div>
+    </div>
+
+    <header class="animate__animated animate__fadeIn">
+      <h1>Tata Motors Stock Price Prediction</h1>
+      <p>
+        Advanced machine learning models to forecast stock performance based on
+        historical data
+      </p>
+    </header>
+
+    <main>
+      <div class="container animate__animated animate__fadeInUp">
+        <section>
+          {% if error %}
+          <div class="error animate-pop">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>{{ error }}</span>
+          </div>
+          {% endif %}
+
+          <div class="info-card">
+            <i class="fas fa-info-circle"></i>
+            <div>
+              <p>
+                For best results, select a date range with sufficient historical
+                data (at least 6 months). Predictions are based on LSTM neural
+                networks trained on Tata Motors stock data.
+              </p>
+            </div>
+          </div>
+
+          <form id="predictionForm" action="/predict" method="post">
+            <div class="form-group">
+              <label for="start_date"
+                ><i class="far fa-calendar-alt"></i> Start Date:</label
+              >
+              <input type="date" id="start_date" name="start_date" required />
+            </div>
+            <div class="form-group">
+              <label for="end_date"
+                ><i class="far fa-calendar-alt"></i> End Date:</label
+              >
+              <input type="date" id="end_date" name="end_date" required />
+            </div>
+            <button type="submit" id="predictButton">
+              <span id="buttonText">Predict Stock Price</span>
+              <div class="spinner" id="spinner"></div>
+            </button>
+          </form>
+        </section>
+      </div>
+
+      <div
+        class="container animate__animated animate__fadeInUp"
+        style="animation-delay: 0.2s"
+      >
+        <h2 style="text-align: center; margin-bottom: 1.5rem">
+          Why Use Our Predictor?
+        </h2>
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <h3>Advanced Models</h3>
+            <p>
+              Utilizing LSTM neural networks for accurate time-series
+              predictions
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-history"></i>
+            </div>
+            <h3>Historical Data</h3>
+            <p>Trained on years of Tata Motors stock performance data</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3>Fast Predictions</h3>
+            <p>Get results quickly with our optimized models</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="animate__animated animate__fadeInUp"
+      style="animation-delay: 0.4s"
+    >
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/companyinfo">Company Info</a>
+          <a href="/contact">Contact</a>
+          <a href="/help">Help</a>
+          <a href="/feedback">Feedback</a>
+        </div>
+        <p>&copy; 2025 Tata Motors Stock Prediction. All rights reserved.</p>
+        <p>
+          This tool is for educational purposes only and should not be
+          considered financial advice.
+        </p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fas fa-building"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Set default dates
+        const today = new Date();
+        const oneYearAgo = new Date();
+        oneYearAgo.setFullYear(today.getFullYear() - 1);
+
+        // Format dates for input fields
+        document.getElementById("start_date").valueAsDate = oneYearAgo;
+        document.getElementById("end_date").valueAsDate = today;
+
+        // Form submission handler
+        const form = document.getElementById("predictionForm");
+        const predictButton = document.getElementById("predictButton");
+        const buttonText = document.getElementById("buttonText");
+        const spinner = document.getElementById("spinner");
+
+        form.addEventListener("submit", function () {
+          // Show loading state
+          buttonText.textContent = "Processing...";
+          spinner.style.display = "block";
+          predictButton.disabled = true;
+        });
+      });
+    </script>
+  </body>
+</html>

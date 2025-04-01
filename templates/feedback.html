@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Share your feedback about Tata Motors Stock Prediction"
+    />
+    <title>Feedback | Tata Motors Stock Prediction</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <style>
+      :root {
+        --primary: #0061a8;
+        --primary-dark: #004d85;
+        --primary-light: #e6f2ff;
+        --secondary: #e74c3c;
+        --light: #f8f9fa;
+        --dark: #1a1a1a;
+        --gray: #6c757d;
+        --light-gray: #e9ecef;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+        --rounded-sm: 8px;
+        --rounded-md: 12px;
+        --rounded-lg: 16px;
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9fbfd;
+        color: var(--dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Modern glass navbar */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-sm);
+        padding: 1rem 2rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .navbar ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .navbar a {
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        border-radius: var(--rounded-sm);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .navbar a:hover {
+        color: var(--primary);
+        background: rgba(0, 97, 168, 0.05);
+      }
+
+      .navbar a.active {
+        color: var(--primary);
+        background: var(--primary-light);
+        font-weight: 600;
+      }
+
+      /* Modern hero section */
+      header {
+        background: linear-gradient(
+            135deg,
+            rgba(0, 97, 168, 0.9) 0%,
+            rgba(0, 77, 133, 0.9) 100%
+          ),
+          url("https://www.tatamotors.com/wp-content/uploads/2020/05/feedback-banner.jpg")
+            center/cover no-repeat;
+        height: 50vh;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        padding: 0 2rem;
+        margin-top: 60px;
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      }
+
+      header h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+
+      header p {
+        font-size: 1.25rem;
+        max-width: 700px;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+      }
+
+      /* Modern container */
+      .container {
+        max-width: 800px;
+        margin: 3rem auto;
+        padding: 0 2rem;
+      }
+
+      /* Feedback Form */
+      .feedback-form {
+        background: white;
+        border-radius: var(--rounded-lg);
+        box-shadow: var(--shadow-sm);
+        padding: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .feedback-form h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+
+      .feedback-form h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 2px;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .form-group label i {
+        color: var(--primary);
+        width: 20px;
+        text-align: center;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--light-gray);
+        border-radius: var(--rounded-sm);
+        font-size: 1rem;
+        transition: var(--transition);
+        background: white;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(0, 97, 168, 0.1);
+      }
+
+      textarea.form-control {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      /* Star Rating */
+      .rating-container {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 1rem 0;
+      }
+
+      .rating-star {
+        font-size: 2rem;
+        color: var(--light-gray);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .rating-star:hover,
+      .rating-star.active {
+        color: #ffc107;
+      }
+
+      .rating-star.hovered {
+        transform: scale(1.2);
+      }
+
+      /* Submit Button */
+      .btn-submit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background: var(--primary);
+        color: white;
+        padding: 1rem;
+        border: none;
+        border-radius: var(--rounded-sm);
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        gap: 0.5rem;
+      }
+
+      .btn-submit:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .btn-submit:active {
+        transform: translateY(0);
+      }
+
+      .spinner {
+        display: none;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Features Section */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .feature-card {
+        background: white;
+        border-radius: var(--rounded-md);
+        box-shadow: var(--shadow-sm);
+        padding: 2rem;
+        text-align: center;
+        transition: var(--transition);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .feature-card p {
+        color: var(--gray);
+        line-height: 1.6;
+      }
+
+      /* Modern footer */
+      footer {
+        background: var(--dark);
+        color: white;
+        padding: 4rem 0 2rem;
+        margin-top: 4rem;
+        clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-light);
+      }
+
+      .footer-links a.active {
+        color: var(--primary-light);
+        font-weight: 600;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 1.25rem;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        color: var(--primary-light);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        header {
+          height: auto;
+          padding: 6rem 1.5rem;
+          clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+        }
+
+        .navbar ul {
+          gap: 0.5rem;
+        }
+
+        .feedback-form {
+          padding: 1.5rem;
+        }
+
+        footer {
+          clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Modern glass navbar -->
+    <nav class="navbar animate__animated animate__fadeIn">
+      <ul>
+        <a href="/">Home</a>
+        <a href="/companyinfo">Company Info</a>
+        <a href="/contact">Contact</a>
+        <a href="/help">Help</a>
+        <a href="/feedback">Feedback</a>
+      </ul>
+    </nav>
+
+    <!-- Modern hero header with gradient overlay -->
+    <header class="animate__animated animate__fadeIn">
+      <div class="animate-fadeIn">
+        <h1>Share Your Experience</h1>
+        <p>
+          Your feedback helps us improve the Tata Motors Stock Prediction
+          platform
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <!-- Feedback Form -->
+        <section class="feedback-form animate-fadeIn">
+          <h2>We Value Your Input</h2>
+
+          <form id="feedbackForm">
+            <div class="form-group">
+              <label for="feedbackName"
+                ><i class="fas fa-user"></i> Name (Optional)</label
+              >
+              <input
+                type="text"
+                id="feedbackName"
+                name="name"
+                class="form-control"
+                placeholder="Your name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="feedbackEmail"
+                ><i class="fas fa-envelope"></i> Email (Optional)</label
+              >
+              <input
+                type="email"
+                id="feedbackEmail"
+                name="email"
+                class="form-control"
+                placeholder="your.email@example.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label><i class="fas fa-star"></i> Rating</label>
+              <div class="rating-container">
+                <i class="far fa-star rating-star" data-value="1"></i>
+                <i class="far fa-star rating-star" data-value="2"></i>
+                <i class="far fa-star rating-star" data-value="3"></i>
+                <i class="far fa-star rating-star" data-value="4"></i>
+                <i class="far fa-star rating-star" data-value="5"></i>
+              </div>
+              <input type="hidden" id="ratingValue" name="rating" value="0" />
+            </div>
+
+            <div class="form-group">
+              <label for="feedbackMessage"
+                ><i class="fas fa-comment-dots"></i> Your Feedback</label
+              >
+              <textarea
+                id="feedbackMessage"
+                name="message"
+                class="form-control"
+                required
+                placeholder="Tell us about your experience..."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              <span id="buttonText">Submit Feedback</span>
+              <div class="spinner" id="spinner"></div>
+            </button>
+          </form>
+        </section>
+
+        <!-- What Happens Next Section -->
+        <section class="animate-fadeIn" style="animation-delay: 0.2s">
+          <h2 style="text-align: center; margin-bottom: 1.5rem">
+            What Happens Next?
+          </h2>
+          <div class="features">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-inbox"></i>
+              </div>
+              <h3>Review</h3>
+              <p>
+                Our team carefully reviews every piece of feedback to understand
+                your needs
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-lightbulb"></i>
+              </div>
+              <h3>Improve</h3>
+              <p>
+                We prioritize and implement the most requested features and
+                fixes
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-sync-alt"></i>
+              </div>
+              <h3>Update</h3>
+              <p>
+                Monthly updates are released based on user feedback and
+                suggestions
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modern footer with clip-path -->
+    <footer class="animate-fadeIn" style="animation-delay: 0.4s">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/companyinfo">Company Info</a>
+          <a href="/contact">Contact</a>
+          <a href="/help">Help</a>
+          <a href="/feedback">Feedback</a>
+        </div>
+
+        <div class="social-links">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <p class="copyright">
+          &copy; 2023 Tata Motors Stock Prediction. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Enhanced Star Rating with hover effects
+      const stars = document.querySelectorAll(".rating-star");
+      let currentRating = 0;
+      let hoverRating = 0;
+
+      stars.forEach((star) => {
+        // Click event
+        star.addEventListener("click", function () {
+          currentRating = parseInt(this.getAttribute("data-value"));
+          document.getElementById("ratingValue").value = currentRating;
+          updateStars();
+        });
+
+        // Hover events
+        star.addEventListener("mouseenter", function () {
+          hoverRating = parseInt(this.getAttribute("data-value"));
+          updateStars(true);
+        });
+
+        star.addEventListener("mouseleave", function () {
+          hoverRating = 0;
+          updateStars();
+        });
+      });
+
+      function updateStars(isHover = false) {
+        const rating = isHover ? hoverRating : currentRating;
+
+        stars.forEach((star) => {
+          const value = parseInt(star.getAttribute("data-value"));
+
+          if (value <= rating) {
+            star.classList.remove("far");
+            star.classList.add("fas", "active");
+            star.style.color = "#ffc107";
+          } else {
+            star.classList.remove("fas", "active");
+            star.classList.add("far");
+            star.style.color = "";
+          }
+
+          // Add hover scale effect
+          if (isHover && value <= hoverRating && value > currentRating) {
+            star.classList.add("hovered");
+          } else {
+            star.classList.remove("hovered");
+          }
+        });
+      }
+
+      // Form submission with better UX
+      document
+        .getElementById("feedbackForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const buttonText = document.getElementById("buttonText");
+          const spinner = document.getElementById("spinner");
+          const form = this;
+
+          buttonText.textContent = "Submitting...";
+          spinner.style.display = "block";
+
+          // Disable button during submission
+          this.querySelector('button[type="submit"]').disabled = true;
+
+          // Simulate form submission
+          setTimeout(() => {
+            // Show success message
+            const successMsg = document.createElement("div");
+            successMsg.innerHTML = `
+            <div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: var(--rounded-sm); margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+              <i class="fas fa-check-circle" style="color: #28a745;"></i>
+              <span>Thank you for your feedback! We appreciate your input.</span>
+            </div>
+          `;
+            form.appendChild(successMsg);
+
+            // Reset form
+            buttonText.textContent = "Submit Feedback";
+            spinner.style.display = "none";
+            form.querySelector('button[type="submit"]').disabled = false;
+            form.reset();
+
+            // Reset stars
+            currentRating = 0;
+            document.getElementById("ratingValue").value = "0";
+            updateStars();
+
+            // Scroll to success message
+            successMsg.scrollIntoView({ behavior: "smooth" });
+
+            // Remove success message after 5 seconds
+            setTimeout(() => {
+              successMsg.remove();
+            }, 5000);
+          }, 1500);
+        });
+    </script>
+  </body>
+</html>

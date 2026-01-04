@@ -1,0 +1,239 @@
+/* =========================================================
+   CHAPTER 2 : SQL
+   SCENARIO 1 : LIBRARY MANAGEMENT SYSTEM
+   ========================================================= */
+
+-- 1. Create BOOKS table
+CREATE TABLE BOOKS (
+    Book_ID INT PRIMARY KEY,
+    Title VARCHAR(100),
+    Author VARCHAR(100),
+    Genre VARCHAR(50),
+    Price DECIMAL(8,2),
+    Publication_Year INT,
+    Copies INT
+);
+
+-- 2. Insert records into BOOKS
+INSERT INTO BOOKS VALUES
+(1,'Java Basics','James','Education',450,2018,10),
+(2,'Python Pro','Guido','Education',650,2020,5),
+(3,'Fiction Story','Alice','Fiction',300,2014,0),
+(4,'AI Future','John','Technology',900,2022,7),
+(5,'Data Science','Smith','Technology',800,2019,3);
+
+-- 3. Display all books
+SELECT * FROM BOOKS;
+
+-- 4. Books published after 2015
+SELECT * FROM BOOKS WHERE Publication_Year > 2015;
+
+-- 5. Create BORROWERS table
+CREATE TABLE BORROWERS (
+    Borrower_ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Address VARCHAR(200),
+    Phone VARCHAR(15),
+    Membership_Type VARCHAR(20)
+);
+
+-- 6. Insert BORROWERS
+INSERT INTO BORROWERS VALUES
+(1,'Amit','Pune','9999999991','Gold'),
+(2,'Neha','Mumbai','9999999992','Silver'),
+(3,'Rahul','Nashik','9999999993','Gold'),
+(4,'Pooja','Nagpur','9999999994','Bronze'),
+(5,'Riya','Delhi','9999999995','Gold');
+
+-- 7. Display borrower names & phone
+SELECT Name, Phone FROM BORROWERS;
+
+-- 8. Gold members
+SELECT * FROM BORROWERS WHERE Membership_Type='Gold';
+
+-- 9. Create ISSUES table
+CREATE TABLE ISSUES (
+    Issue_ID INT PRIMARY KEY,
+    Borrower_ID INT,
+    Book_ID INT,
+    Issue_Date DATE,
+    Return_Date DATE
+);
+
+-- 10. Insert ISSUES
+INSERT INTO ISSUES VALUES
+(1,1,2,'2024-01-01','2024-01-10'),
+(2,1,4,'2024-02-01',NULL),
+(3,2,1,'2024-02-10','2024-02-20'),
+(4,3,5,'2024-03-01','2024-03-12'),
+(5,3,2,'2024-03-15',NULL);
+
+-- Medium Queries
+SELECT Title, Author FROM BOOKS WHERE Price > 500;
+
+UPDATE BOOKS SET Price = Price * 1.10 WHERE Genre='Fiction';
+
+DELETE FROM BOOKS WHERE Copies = 0;
+
+CREATE VIEW AVAILABLE_BOOKS AS
+SELECT * FROM BOOKS WHERE Copies > 5;
+
+SELECT * FROM BOOKS ORDER BY Publication_Year DESC;
+
+SELECT Borrower_ID, COUNT(*) 
+FROM ISSUES GROUP BY Borrower_ID HAVING COUNT(*) > 2;
+
+-- Hard Query
+SELECT B.Name
+FROM BORROWERS B
+LEFT JOIN ISSUES I ON B.Borrower_ID = I.Borrower_ID
+WHERE I.Return_Date IS NULL;
+
+
+/* =========================================================
+   SCENARIO 2 : MOVIE RENTAL SYSTEM
+   ========================================================= */
+
+CREATE TABLE MOVIES (
+    Movie_ID INT PRIMARY KEY,
+    Title VARCHAR(100),
+    Genre VARCHAR(50),
+    Release_Date DATE,
+    Rating DECIMAL(3,1),
+    Director VARCHAR(100)
+);
+
+INSERT INTO MOVIES VALUES
+(1,'Inception','Action','2010-07-16',8.8,'Nolan'),
+(2,'Avatar','Action','2009-12-18',7.9,'Cameron'),
+(3,'Titanic','Drama','1997-12-19',4.5,'Cameron'),
+(4,'Joker','Crime','2019-10-04',8.4,'Todd'),
+(5,'Frozen','Animation','2013-11-27',6.5,'Disney');
+
+CREATE TABLE CUSTOMERS (
+    Customer_ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Phone VARCHAR(15),
+    Membership_Type VARCHAR(20)
+);
+
+INSERT INTO CUSTOMERS VALUES
+(1,'Raj','raj@gmail.com','8888888881','Premium'),
+(2,'Simran','sim@gmail.com','8888888882','Basic'),
+(3,'Karan','kar@gmail.com','8888888883','Premium'),
+(4,'Anita','ani@gmail.com','8888888884',NULL),
+(5,'Rohit','roh@gmail.com','8888888885','Premium');
+
+CREATE TABLE RENTALS (
+    Rental_ID INT PRIMARY KEY,
+    Customer_ID INT,
+    Movie_ID INT,
+    Rental_Date DATE,
+    Return_Date DATE
+);
+
+INSERT INTO RENTALS VALUES
+(1,1,1,'2024-01-01','2024-01-05'),
+(2,1,2,'2024-01-10',NULL),
+(3,3,1,'2024-02-01','2024-02-05'),
+(4,3,4,'2024-02-10','2024-02-15'),
+(5,5,1,'2024-03-01','2024-03-05');
+
+ALTER TABLE MOVIES MODIFY Genre VARCHAR(50) NOT NULL;
+
+ALTER TABLE CUSTOMERS ADD UNIQUE (Email);
+
+ALTER TABLE RENTALS ADD FOREIGN KEY (Movie_ID) REFERENCES MOVIES(Movie_ID);
+
+CREATE INDEX idx_rating ON MOVIES(Rating);
+
+SELECT AVG(Rating) FROM MOVIES;
+
+UPDATE MOVIES SET Genre='Uncategorized' WHERE Rating < 5;
+
+DELETE FROM CUSTOMERS WHERE Membership_Type IS NULL;
+
+SELECT Title, COUNT(*) 
+FROM RENTALS R JOIN MOVIES M ON R.Movie_ID=M.Movie_ID
+GROUP BY Title
+HAVING COUNT(*) = (
+    SELECT MAX(cnt) FROM (
+        SELECT COUNT(*) cnt FROM RENTALS GROUP BY Movie_ID
+    ) t
+);
+
+
+/* =========================================================
+   CHAPTER 3 : MongoDB
+   ========================================================= */
+
+use Inventory
+
+db.Products.insertMany([
+{ProductID:1,Name:'TV',Category:'Electronics',Stock:15,Price:500},
+{ProductID:2,Name:'Phone',Category:'Electronics',Stock:8,Price:300},
+{ProductID:3,Name:'Fan',Category:'Home Appliances',Stock:25,Price:120},
+{ProductID:4,Name:'Chair',Category:'Furniture',Stock:40,Price:60},
+{ProductID:5,Name:'AC',Category:'Home Appliances',Stock:5,Price:700}
+])
+
+db.Products.find({Stock:{$gt:10}})
+db.Products.find({Category:'Electronics'})
+db.Products.updateOne({ProductID:7},{$set:{Price:19.99}})
+db.Products.deleteOne({ProductID:2})
+db.Products.countDocuments()
+db.Products.find().sort({Price:-1})
+db.Products.find({Price:{$in:[10,15]}})
+db.Products.find({Category:'Home Appliances',Stock:{$gt:30}})
+db.Products.find({Stock:{$nin:[10,15]}})
+db.Products.find({Stock:{$lt:5},Price:{$gt:10}})
+db.Products.find({Name:/c/i})
+db.Products.deleteMany({Stock:0})
+db.Products.find().skip(2).limit(5)
+
+use Bank
+
+db.Customers.find({AccountType:'Savings'})
+db.Customers.updateOne({CustomerID:4},{$set:{AccountBalance:5000}})
+db.Customers.deleteOne({CustomerID:2})
+db.Customers.countDocuments({AccountBalance:{$gt:1000}})
+db.Customers.find().sort({AccountBalance:1})
+db.Customers.find({AccountType:{$in:['Checking','Business']}})
+db.Customers.updateMany({AccountType:'Savings'},{$inc:{AccountBalance:1000}})
+db.Customers.deleteMany({})
+
+
+/* =========================================================
+   CHAPTER 4 : Neo4j (Cypher)
+   ========================================================= */
+
+CREATE (:User {name:'Alex', joined:'2023-01-01'});
+CREATE (:User {name:'Maya', joined:'2023-02-01'});
+CREATE (:User {name:'Ryan'});
+CREATE (:User {name:'Priya'});
+CREATE (:User {name:'Sam'});
+
+MATCH (a:User {name:'Alex'})
+CREATE (a)-[:POSTED]->(:Post {title:'Vacation', date:'2024-01-01'}),
+       (a)-[:POSTED]->(:Post {title:'Party', date:'2024-01-05'});
+
+MATCH (m:User {name:'Maya'})
+CREATE (m)-[:POSTED]->(:Post {title:'Graduation'});
+
+MATCH (r:User {name:'Ryan'}),(p:Post {title:'Party'})
+CREATE (r)-[:COMMENTED {text:'Nice!', date:'2024-01-06'}]->(p);
+
+MATCH (pr:User {name:'Priya'}),(p:Post)
+WHERE p.title IN ['Vacation','Party']
+CREATE (pr)-[:LIKED]->(p);
+
+MATCH (s:User {name:'Sam'}),(u:User)
+WHERE s <> u
+CREATE (s)-[:FOLLOWS]->(u);
+
+MATCH (a:User {name:'Alex'})-[:POSTED]->(p) RETURN p;
+MATCH (u)-[:LIKED]->(p)<-[:POSTED]-(a:User {name:'Alex'}) RETURN u;
+MATCH (u:User) WHERE NOT (u)-[:POSTED]->() RETURN u;
+MATCH (u)-[:FOLLOWS]->(v) RETURN u,v;
+MATCH (u)-[:COMMENTED]->(p) RETURN p,u;

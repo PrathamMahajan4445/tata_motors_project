@@ -90,7 +90,105 @@ LEFT JOIN ISSUES I ON B.Borrower_ID = I.Borrower_ID
 WHERE I.Return_Date IS NULL;
 
 
-/* =========================================================
+/*
+/*******************************
+ DATABASE & COLLECTION
+********************************/
+show dbs
+use inventory
+show collections
+
+
+/*******************************
+ INSERT DOCUMENTS
+********************************/
+db.Products.insertMany([
+  {ProductID: 1, Name: 'TV', Category: 'Electronics', Stock: 15, Price: 500},
+  {ProductID: 2, Name: 'Phone', Category: 'Electronics', Stock: 8, Price: 300},
+  {ProductID: 3, Name: 'Fan', Category: 'Home Appliances', Stock: 25, Price: 120},
+  {ProductID: 4, Name: 'Chair', Category: 'Furniture', Stock: 40, Price: 60},
+  {ProductID: 5, Name: 'AC', Category: 'Home Appliances', Stock: 5, Price: 700}
+])
+
+db.Products.insertMany([
+  {ProductID: 6, Name: 'Laptop', Category: 'Electronics', Stock: 10, Price: 900},
+  {ProductID: 7, Name: 'Table', Category: 'Furniture', Stock: 20, Price: 150},
+  {ProductID: 8, Name: 'Washing Machine', Category: 'Home Appliances', Stock: 7, Price: 650},
+  {ProductID: 9, Name: 'Headphones', Category: 'Electronics', Stock: 30, Price: 80},
+  {ProductID: 10, Name: 'Refrigerator', Category: 'Home Appliances', Stock: 6, Price: 800}
+])
+
+
+/*******************************
+ BASIC FIND QUERIES
+********************************/
+db.Products.find()
+db.Products.find({Category: 'Electronics'})
+db.Products.find({Name: 'AC'})
+db.Products.find({ProductID: 4})
+
+
+/*******************************
+ COMPARISON OPERATORS
+********************************/
+db.Products.find({Stock: {$gt: 10}})
+db.Products.find({Stock: {$lt: 20}})
+db.Products.find({Category: 'Furniture', Stock: {$gt: 10}})
+db.Products.find({Stock: {$lt: 30}, Price: {$gt: 500}})
+
+
+/*******************************
+ IN & NOT IN
+********************************/
+db.Products.find({Price: {$in: [800, 1000]}})
+db.Products.find({Price: {$nin: [800, 1000]}})
+
+
+/*******************************
+ REGEX SEARCH
+********************************/
+db.Products.find({Name: /c/i})
+db.Products.find({Name: /^A/})
+db.Products.find({Name: /r$/})
+
+
+/*******************************
+ SORTING
+********************************/
+db.Products.find().sort({Price: -1})
+db.Products.find().sort({Price: 1})
+
+
+/*******************************
+ PAGINATION
+********************************/
+db.Products.find().skip(2).limit(5)
+
+
+/*******************************
+ UPDATE OPERATIONS
+********************************/
+db.Products.updateOne(
+  {ProductID: 3},
+  {$set: {Category: 'Furniture'}}
+)
+
+db.Products.updateMany(
+  {Category: 'Furniture'},
+  {$set: {Price: 1000}}
+)
+
+
+/*******************************
+ DELETE OPERATIONS
+********************************/
+db.Products.deleteOne({ProductID: 2})
+
+
+/*******************************
+ COUNT DOCUMENTS
+********************************/
+db.Products.countDocuments() =========================================================
    SCENARIO 2 : MOVIE RENTAL SYSTEM
    ========================================================= */
 
